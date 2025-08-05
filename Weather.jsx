@@ -1,0 +1,111 @@
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import Typography from '@mui/material/Typography';
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
+import { useState } from 'react';
+export default function Weather() {
+//document.querySelector('body').style.backgroundImage = 'url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRh2luEBctE-DUpfc5Vt71ZBAg_AYyoPTJpWg&s)';
+document.querySelector('body').style.backgroundColor='#b5a9a9ff'
+
+  let [place, setplace] = useState('');
+  let [data, setdata] = useState(null);
+  //weather url
+  let hot='url(data:image/jpeg;base64,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)'
+  let moderate='url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWDlk2OEgTERqWEu9o4iMkYVJI8OWeDGVPPQ&s)'
+  let rain='url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRh2luEBctE-DUpfc5Vt71ZBAg_AYyoPTJpWg&s)'
+  //api links
+  let api_url = "https://api.openweathermap.org/data/2.5/weather";  
+  let api_key = "4f176cd5fd930293dd922e1d89770226";
+
+  //Extracting data from api
+  let info = async () => {
+    if (!place) return;
+    let response = await fetch(`${api_url}?q=${place}&appid=${api_key}&units=metric`);
+    let json_res = await response.json();
+    console.log(json_res.main);
+    
+    setdata(json_res);
+  };
+
+  function buttonfun() {
+    info();
+  }
+
+  return (
+    <div style={{
+      textAlign: 'center',
+      // backgroundColor: '#f2f2f2',
+      padding: '20px',
+      borderRadius: '10px',
+      // boxShadow: '0px 0px 10px rgba(0,0,0,0.1)'
+    }}>
+      <h1 style={{ color: '#3498db' }}><b>....WEATHER DETECTOR....🌨🌞🌈</b></h1>
+      <hr style={{ border: '1px solid #ccc' }}></hr>
+      <div>
+        <Box sx={{
+          width: 500,
+          maxWidth: '100%',
+          margin: '20px auto',
+          padding: '10px',
+          borderRadius: '10px',
+          boxShadow: '0px 0px 10px rgba(0,0,0,0.1)'
+        }}>
+          <TextField
+            fullWidth
+            label="Enter City"
+            id="fullWidth"
+            value={place}
+            onChange={(event) => setplace(event.target.value)}
+            required
+            sx={{ backgroundColor: '#fff' }}
+          />
+        </Box>
+        <Stack spacing={0} direction="row" justifyContent="center">
+          <Button onClick={buttonfun} variant="contained" color="primary">Search</Button>
+        </Stack>
+        <br></br>
+        <div>
+          {data && (
+            <Card sx={{
+              maxWidth: 345,
+              margin: '20px auto',
+              padding: '10px',
+              borderRadius: '10px',
+              boxShadow: '0px 0px 10px rgba(0,0,0,0.1)',
+              backgroundColor: '#fff'
+            }}>
+              <CardContent>
+                <Typography gutterBottom variant="h5" component="div" color="primary">
+  <b> Weather Details</b><hr style={{ border: '1px solid #ccc' }}></hr>
+  <div style={{
+    height: '100px',
+    width: '100px',
+    backgroundImage :data.main.temp <= 15 ? rain : (data.main.temp > 15 && data.main.temp <= 25 ? moderate : hot),
+   
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    margin: '0 auto'  
+  }}> </div>
+  <hr></hr>
+  {data.main.temp<=15 ? "🥶⛄🧥": (data.main.temp >15 && data.main.temp<=25 ? " 🌤🌦🌧☔💧":" 🥵☀")}<br></br>
+  Temperature: {data.main.temp}°C <br></br>
+  Humidity:{data.main.humidity}<br></br>
+  pressure:{data.main.pressure}<br></br>
+  sea_level :{data.main.sea_level}<br></br>
+  temp_max:{data.main.temp_max}<br></br>
+  temp_min:{data.main.temp_min}<br></br>
+</Typography>
+
+
+              </CardContent>
+            </Card>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+ 
